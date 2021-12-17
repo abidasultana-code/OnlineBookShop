@@ -13,7 +13,7 @@
                <div class="row">
                    <div class="col-lg-3">
                        <div class="header__logo">
-                           <a href="index.php"><img src="Assets/img/logo.png" alt=""></a>
+                           <a href="index.php"><img src="../Assets/img/logo.png" alt="" style="height: 60px; margin-top: -30px;"></a>
                            <p style="font: 30px solid bold; color:green">Online Book Shop</p>
                        </div>
                    </div>
