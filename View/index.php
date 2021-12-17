@@ -1,32 +1,37 @@
+<?php 
+include('../Model/connect.php');
+$productCount = 0;
+?>
+
 <!DOCTYPE html>
 <html lang="eng">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Fit and Nutrition">
+    <meta name="description" content="Book Shop">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fit E-Commerce</title>
+    <title>Online Book Shop</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="./View/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="./View/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="./View/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="./View/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="./View/css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="./View/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="./View/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="./View/css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 
 <body>
     <!-- Page Preloder -->
-    <!-- <div id="preloder">
+    <div id="preloder">
         <div class="loader"></div>
-    </div> -->
+    </div>
 
     <!-- hamburger Begin -->
     <?php include('hamburger.php') ?>
@@ -36,14 +41,14 @@
     <?php include('Header.php') ?>
 
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+    <section class="breadcrumb-section" style="background-image: url('../Assets/img/breadcrumb.png'); background-repeat: no-repeat;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
                         <h2>Online Book Shop</h2>
                         <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
+                            <a href="./">Home</a>
                             <span>Shop</span>
                         </div>
                     </div>
@@ -57,6 +62,35 @@
     <section class="product spad">
         <div class="container">
             <div class="row">
+            <div class="col-lg-3 col-md-5">
+                    <div class="sidebar">
+                        <div class="sidebar__item">
+                            <h4>Categories</h4>
+                            <ul>
+                                <?php
+                                //getting the categories
+
+                                try {
+                                    $catsql = "SELECT categories FROM categories ";
+                                    $catObj = $conn->query($catsql);
+                                    $catTab = $catObj->fetchAll();
+                                    foreach ($catTab as $key) {
+                                ?>
+                                        <li><a href="#"><?php echo $key[0] ?></a></li>
+                                <?php
+                                    }
+                                } catch (PDOException $e) {
+                                    echo "<script>console.log('category fetch error');</script>";
+                                }
+
+
+                                ?>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            
                 <div class="col-lg-9 col-md-7">
 
                     <?php
@@ -65,7 +99,6 @@
                     try {
                         $prsql = "SELECT * FROM product ";
                         $prObj = $conn->query($prsql);
-                        //$productCount = $prObj->fetchColumn();
                     ?>
 
                         <div class="filter__item">
@@ -79,7 +112,6 @@
                                                 </select>
                                             </div> -->
                                 </div>
-
                             </div>
                         </div>
                         <div class="row">
@@ -88,12 +120,11 @@
                             $prTab = $prObj->fetchAll();
                             foreach ($prTab as $key) {
                             ?>
-                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="col-lg-3 col-md-6">
                                     <div class="product__item">
-                                        <div class="product__item__pic set-bg" data-setbg="<?php echo $key[5] ?>">
+                                        <div class="product__item__pic" style="background-image: url('<?php echo $key[5] ?>'); background-repeat: no-repeat; background-size:contain; background-position:center;" >
                                         
                                             <ul class="product__item__pic__hover">
-
                                                 <li>
                                                     <!-- <button ></button> -->
                                                     <a style="cursor: pointer;" onclick="promtLogin(<?php echo $key[0] ?>, <?php echo $key[3] ?>);"><i class="fa fa-shopping-cart" style="margin-top: 10px;"></i></a>
@@ -106,7 +137,6 @@
                                         </div>
                                     </div>
                                 </div>
-
 
                         <?php
                                 $productCount++;
