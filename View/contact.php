@@ -50,8 +50,7 @@ if(isset($_SESSION['user_id'])){
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Ogani Template">
-    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="description" content="Book Shop">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Online Book Shop</title>
@@ -86,15 +85,15 @@ if(isset($_SESSION['user_id'])){
 
 
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+    <section class="breadcrumb-section" style="background-image: url('../Assets/img/breadcrumb.png'); background-repeat: no-repeat;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Contact Us</h2>
+                        <h2>Online Book Shop</h2>
                         <div class="breadcrumb__option">
-                            <a href="index.php">Home</a>
-                            <span>Contact Us</span>
+                            <a href="./">Home</a>
+                            <span>Shop</span>
                         </div>
                     </div>
                 </div>

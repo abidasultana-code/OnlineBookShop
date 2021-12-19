@@ -3,9 +3,21 @@
     
            <div class="container">
 
-               <div class="header__top__right">
+           <div class="header__top__right">
                    <div class="header__top__right__auth">
-    
+                       <?php
+                        if ($is_loggedIn == 0) {
+                        ?>
+                           <a href="login.php"><i class="fa fa-user"></i> Login</a>
+                       <?php
+                        } else {
+                        ?>
+                           <a href="./Admin/includes/logout.php">Welcome <?php echo $username ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                               <i class="fa fa-user">&nbsp;&nbsp;&nbsp;Logout</i>
+                           </a>
+                       <?php
+                        }
+                        ?>
 
                    </div>
                </div>

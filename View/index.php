@@ -1,6 +1,49 @@
 <?php 
+session_start();
+
 include('../Model/connect.php');
 $productCount = 0;
+
+//o by default means not logged in, 1 means logged in
+$is_loggedIn = 0;
+$username = '';
+$user_id = '';
+$cartCount = 0;
+$notiCount = 0;
+
+if ((isset($_SESSION['user_id']))) {
+    $user_id = $_SESSION['user_id'];
+}
+
+
+//check if logged in
+if (isset($_SESSION['username'])) {
+    $is_loggedIn = 1;
+    $username = $_SESSION['username'];
+
+    //checkNotifications
+    // try {
+    //     $sql = "SELECT * FROM `notifications` WHERE user_id='" . $user_id . "' AND seen='0' ";
+    //     $object = $conn->query($sql);
+    //     $notiCount = $object->rowCount();
+    // } catch (PDOException $e) {
+    //     echo $e;
+    // }
+}
+
+
+
+if (isset($_SESSION['user_id'])) {
+    //if the user is logged in
+    // try {
+    //     $sql2 = "SELECT * FROM `cart` WHERE user_id='" . $user_id . "'";
+    //     $object2 = $conn->query($sql2);
+    //     $cartCount = $object2->rowCount();
+    // } catch (PDOException $e) {
+    //     echo $e;
+    // }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -224,6 +267,12 @@ $productCount = 0;
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        var is_loggedIn = "<?php echo $is_loggedIn ?>";
+        var user_id = "<?php echo $user_id ?>";
+    </script>
+    <script src="../Controllers/promptLogin.js"></script>
+    
 
 
 </body>
