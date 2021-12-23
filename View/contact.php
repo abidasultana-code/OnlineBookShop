@@ -7,6 +7,7 @@ $productCount=0;
 $is_loggedIn=0; 
 $username='';
 $user_id='';
+$notiCount = 0;
 $cartCount=0;
 
 if ((isset($_SESSION['user_id'])) ) {
@@ -14,39 +15,30 @@ if ((isset($_SESSION['user_id'])) ) {
 }
 
 
-//check if logged in
-if (isset($_SESSION['username']) ) {
-    $is_loggedIn=1;
-    $username=$_SESSION['username'];
-}
-
 //db connection
-try{
-    $conn=new PDO("mysql:host=localhost;dbname=fit_ecommerce;",'root','');
-    echo "<script>console.log('connection successful');</script>";
-    
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch(PDOException $e){
-    echo "<script>window.alert('Database connection error');</script>";
+include('../Model/connect.php');
+
+//check if logged in
+if (isset($_SESSION['username'])) {
+    $is_loggedIn = 1;
+    $username = $_SESSION['username'];
+
+    //checkNotifications
+    // try {
+    //     $sql = "SELECT * FROM `notifications` WHERE user_id='" . $user_id . "' AND seen='0' ";
+    //     $object = $conn->query($sql);
+    //     $notiCount = $object->rowCount();
+    // } catch (PDOException $e) {
+    //     echo $e;
+    // }
 }
 
-if(isset($_SESSION['user_id'])){
-    //if the user is logged in
-    try{
-        $sql2= "SELECT * FROM `cart` WHERE user_id='".$user_id."'";
-        $object2=$conn->query($sql2);
-        $cartCount=$object2->rowCount();
-
-    }catch(PDOException $e){
-        echo $ex1;
-    }
-}
+include('../Controllers/cartUpdater.php');
 
 
 ?>
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en-US">
 
 <head>
     <meta charset="UTF-8">
