@@ -31,18 +31,8 @@ if (isset($_SESSION['username'])) {
     // }
 }
 
+include('../Controllers/cartUpdater.php');
 
-
-if (isset($_SESSION['user_id'])) {
-    //if the user is logged in
-    // try {
-    //     $sql2 = "SELECT * FROM `cart` WHERE user_id='" . $user_id . "'";
-    //     $object2 = $conn->query($sql2);
-    //     $cartCount = $object2->rowCount();
-    // } catch (PDOException $e) {
-    //     echo $e;
-    // }
-}
 
 ?>
 
@@ -170,7 +160,7 @@ if (isset($_SESSION['user_id'])) {
                                             <ul class="product__item__pic__hover">
                                                 <li>
                                                     <!-- <button ></button> -->
-                                                    <a style="cursor: pointer;" onclick="promtLogin(<?php echo $key[0] ?>, <?php echo $key[3] ?>);"><i class="fa fa-shopping-cart" style="margin-top: 10px;"></i></a>
+                                                    <a style="cursor: pointer;" onclick="promtLogin(<?php echo $key[0] ?>, <?php echo $key[3] ?>);"><i class="fa fa-shopping-cart" style="margin-top: 0px;"></i></a>
                                                 </li>
                                             </ul>
                                         </div>
