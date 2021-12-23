@@ -9,7 +9,7 @@ function promtLogin(productID, productPrice) {
         //just add the product to the cart through ajax
         
         var ajaxreq = new XMLHttpRequest();
-        ajaxreq.open("GET", "insertToCart_Ajax.php?productID=" + productID + "&user_id=" + user_id + "&product_price=" + productPrice);
+        ajaxreq.open("GET", "../Controllers/insertToCart_Ajax.php?productID=" + productID + "&user_id=" + user_id + "&product_price=" + productPrice);
         //console.log(member.id);
         ajaxreq.onreadystatechange = function() {
             if (ajaxreq.readyState == 4 && ajaxreq.status == 200) {
@@ -26,3 +26,5 @@ function promtLogin(productID, productPrice) {
         ajaxreq.send();
     }
 }
+
+// "insertToCart_Ajax.php?productID=" + productID + "&user_id=" + user_id + "&product_price=" + productPrice
