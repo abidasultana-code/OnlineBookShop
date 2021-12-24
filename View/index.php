@@ -95,91 +95,120 @@ include('../Controllers/cartUpdater.php');
     <section class="product spad">
         <div class="container">
             <div class="row">
-            <div class="col-lg-3 col-md-5">
-                    <div class="sidebar">
-                        <div class="sidebar__item">
-                            <h4>Categories</h4>
-                            <ul>
-                                <?php
-                                //getting the categories
-
-                                try {
-                                    $catsql = "SELECT categories FROM categories ";
-                                    $catObj = $conn->query($catsql);
-                                    $catTab = $catObj->fetchAll();
-                                    foreach ($catTab as $key) {
-                                ?>
-                                        <li><a href="#"><?php echo $key[0] ?></a></li>
-                                <?php
-                                    }
-                                } catch (PDOException $e) {
-                                    echo "<script>console.log('category fetch error');</script>";
-                                }
-
-
-                                ?>
-                            </ul>
-
-                        </div>
-                    </div>
-                </div>
+            <?php include('category.php') ?>
             
                 <div class="col-lg-9 col-md-7">
 
                     <?php
                     //getting the products
 
-                    try {
-                        $prsql = "SELECT * FROM product ";
-                        $prObj = $conn->query($prsql);
-                    ?>
-
-                        <div class="filter__item">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-5">
-                                    <!-- <div class="filter__sort">
-                                                <span>Sort By</span>
-                                                <select>
-                                                    <option value="0">Default</option>
-                                                    <option value="0">Default</option>
-                                                </select>
-                                            </div> -->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-
-                            <?php
-                            $prTab = $prObj->fetchAll();
-                            foreach ($prTab as $key) {
-                            ?>
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="product__item">
-                                        <div class="product__item__pic" style="background-image: url('<?php echo $key[5] ?>'); background-repeat: no-repeat; background-size:contain; background-position:center;" >
-                                        
-                                            <ul class="product__item__pic__hover">
-                                                <li>
-                                                    <!-- <button ></button> -->
-                                                    <a style="cursor: pointer;" onclick="promtLogin(<?php echo $key[0] ?>, <?php echo $key[3] ?>);"><i class="fa fa-shopping-cart" style="margin-top: 0px;"></i></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__item__text">
-                                            <h6><a class="productName" onclick="redirectToProductDetails(<?php echo $key[0] ?>);" ><?php echo $key[2] ?></a></h6>
-                                            <h5>$<?php echo $key[3] ?></h5>
-                                        </div>
+                    if(isset($_GET['cat'])){
+                        $cat=$_GET['cat'];
+                        try {
+                            $prsql = "SELECT * FROM product where categories_id='".$cat."'";
+                            $prObj = $conn->query($prsql);
+                        ?>
+    
+                            <div class="filter__item">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-5">
+                                        <!-- <div class="filter__sort">
+                                                    <span>Sort By</span>
+                                                    <select>
+                                                        <option value="0">Default</option>
+                                                        <option value="0">Default</option>
+                                                    </select>
+                                                </div> -->
                                     </div>
                                 </div>
-
-                        <?php
-                                $productCount++;
+                            </div>
+                            <div class="row">
+    
+                                <?php
+                                $prTab = $prObj->fetchAll();
+                                foreach ($prTab as $key) {
+                                ?>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="product__item">
+                                            <div class="product__item__pic" style="background-image: url('<?php echo $key[5] ?>'); background-repeat: no-repeat; background-size:contain; background-position:center;" >
+                                            
+                                                <ul class="product__item__pic__hover">
+                                                    <li>
+                                                        <!-- <button ></button> -->
+                                                        <a style="cursor: pointer;" onclick="promtLogin(<?php echo $key[0] ?>, <?php echo $key[3] ?>);"><i class="fa fa-shopping-cart" style="margin-top: 0px;"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="product__item__text">
+                                                <h6><a class="productName" onclick="redirectToProductDetails(<?php echo $key[0] ?>);" ><?php echo $key[2] ?></a></h6>
+                                                <h5>$<?php echo $key[3] ?></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                            <?php
+                                    $productCount++;
+                                }
+                            } catch (PDOException $e) {
+                                echo "<script>console.log('product fetch error');</script>";
                             }
-                        } catch (PDOException $e) {
-                            echo "<script>console.log('product fetch error');</script>";
-                        }
 
-
+                    }
+                    else{
+                        try {
+                            $prsql = "SELECT * FROM product ";
+                            $prObj = $conn->query($prsql);
                         ?>
+    
+                            <div class="filter__item">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-5">
+                                        <!-- <div class="filter__sort">
+                                                    <span>Sort By</span>
+                                                    <select>
+                                                        <option value="0">Default</option>
+                                                        <option value="0">Default</option>
+                                                    </select>
+                                                </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+    
+                                <?php
+                                $prTab = $prObj->fetchAll();
+                                foreach ($prTab as $key) {
+                                ?>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="product__item">
+                                            <div class="product__item__pic" style="background-image: url('<?php echo $key[5] ?>'); background-repeat: no-repeat; background-size:contain; background-position:center;" >
+                                            
+                                                <ul class="product__item__pic__hover">
+                                                    <li>
+                                                        <!-- <button ></button> -->
+                                                        <a style="cursor: pointer;" onclick="promtLogin(<?php echo $key[0] ?>, <?php echo $key[3] ?>);"><i class="fa fa-shopping-cart" style="margin-top: 0px;"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="product__item__text">
+                                                <h6><a class="productName" onclick="redirectToProductDetails(<?php echo $key[0] ?>);" ><?php echo $key[2] ?></a></h6>
+                                                <h5>$<?php echo $key[3] ?></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                            <?php
+                                    $productCount++;
+                                }
+                            } catch (PDOException $e) {
+                                echo "<script>console.log('product fetch error');</script>";
+                            }
+                    }
+
+                    
+
+
+                    ?>
 
 
                         </div><!-- row ends -->
@@ -262,6 +291,7 @@ include('../Controllers/cartUpdater.php');
         var user_id = "<?php echo $user_id ?>";
     </script>
     <script src="../Controllers/promptLogin.js"></script>
+    <script src="../Controllers/categorySelector.js"></script>
     
 
 

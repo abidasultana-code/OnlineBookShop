@@ -6,7 +6,7 @@
      if(isset($_GET['productID']) ){
           $productID=$_GET['productID'];  
           $user_id=$_GET['user_id']; 
-          $product_price=$_GET['product_price'];                      
+          $product_price=$_GET['product_price'];                  
 
           try{
                $sql= "INSERT INTO cart (user_id, product_id, product_qty, total_price) VALUES ('".$user_id."','".$productID."','0','0')";
